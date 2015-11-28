@@ -271,6 +271,13 @@
                 android:icon="@drawable/ic_settings_location"
                 />
 
+        <dashboard-tile
+                android:id="@+id/gesture_settings"
+                android:title="@string/gesture_settings_title"
+                android:fragment="com.android.settings.gestures.GestureSettings"
+                android:icon="@drawable/ic_settings_gesture"
+                settings:switchClass="com.android.settings.gestures.GesturesEnabler"
+                />
     </dashboard-category>
 
     <!-- SYSTEM -->

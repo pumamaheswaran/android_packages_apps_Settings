@@ -6062,5 +6062,10 @@
    <string name="imei_information_title">IMEI information</string>
    <string name="imei_information_summary">IMEI relative information</string>
    <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
-
+   <string name="gesture_settings_title">Gestures</string>
+   <string name="action_settings">Settings</string>
+   <string name="title_activity_multi_touch">MultiTouchActivity</string>
+   <string name="add_gesture">Add gestures</string>
+   <string name="gestures_not_enabled_message">To see a list of saved gestures, turn gestures on.</string>
+   <string name="keywords_gestures">gestures</string>
 </resources>
