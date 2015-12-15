@@ -80,7 +80,7 @@
     <uses-permission android:name="cyanogenmod.permission.MODIFY_PROFILES" />
     <uses-permission android:name="cyanogenmod.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="cyanogenmod.permission.WRITE_SECURE_SETTINGS"/>
-
+    <uses-permission android:name="android.permission.MULTI_TOUCH_DIS" />
     <permission
         android:name="cyanogenmod.permission.PROTECTED_APP"
         android:protectionLevel="signatureOrSystem" />
@@ -2369,7 +2369,18 @@
                 <action android:name="android.content.action.SEARCH_INDEXABLES_PROVIDER" />
             </intent-filter>
         </provider>
-
+         <!-- Provider added for sharing the gestures file with other apps-->
+         
+         <!--<provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.android.settings.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+        -->
         <receiver
             android:name=".cyanogenmod.ProtectedAppsReceiver"
             android:permission="cyanogenmod.permission.PROTECTED_APP">

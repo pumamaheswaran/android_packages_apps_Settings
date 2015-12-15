@@ -38,10 +38,23 @@ import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.lang.Boolean;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 public class GesturesEnabler extends GenericSwitchToggle  {
 
+    private static final String TAG = "GesturesEnabler";
+
+    public interface GesturesEnablerListener {
+        public void fireSwitchChangedEvent(boolean state);
+    }
+
     private Context mContext;
+    private Boolean mSwitchState;
+    private final String PREFS_FILE = "switch_state";
+    private final String GESTURE_KEY = "gesture_state";
+    private GesturesEnablerListener mGesturesEnablerListener;
 
     public GesturesEnabler(Context context, SwitchBar switchBar) {
         super(context, switchBar);
@@ -71,39 +84,45 @@ public class GesturesEnabler extends GenericSwitchToggle  {
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         
         //Do nothing if called as a result of a state machine event
-        if (mStateMachineEvent) {
+        /*if (mStateMachineEvent) {
             return;
-        }
-        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+        }*/
+        SharedPreferences sharedPref = mContext.getSharedPreferences(PREFS_FILE,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(GESTURE_KEY, isChecked);
+        editor.commit();
+        mSwitchState = isChecked;
+        //Log.d(TAG,"Firing Switch Changed Event");
+        mGesturesEnablerListener.fireSwitchChangedEvent(isChecked);
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         super.onCheckedChanged(buttonView, isChecked);
-        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     private void setupSwitches() {
         //TODO: Logic for finding the current saved state of the switch and setting the switch to that state.
-
+        handleGestureStateChanged(mSwitchState);
         if (mSwitchBar != null) {
             mSwitchBar.show();
         }
     }
 
     private void init() {
-        //TODO: Got to figure out, what goes in this function.
+        
+        SharedPreferences sharedPref = mContext.getSharedPreferences(PREFS_FILE,Context.MODE_PRIVATE);
+        mSwitchState = sharedPref.getBoolean(GESTURE_KEY,false);
     }
 
-    /*private void handleGestureStateChanged(int state) {
-        switch (state) {
+    private void handleGestureStateChanged(Boolean state) {
+        setChecked(state);
+    }
 
-            case GestureConstants.GESTURE_ON:
-
-            case GestureConstants.GENSTURE_OFF:
-
-
-        }
-    }*/
+    public void setGesturesEnablerListener(GesturesEnablerListener gesturesEnablerListener ) {
+        //Log.d(TAG,"Setting GesturesEnablerListener");
+        mGesturesEnablerListener = gesturesEnablerListener;
+    }
 
 }

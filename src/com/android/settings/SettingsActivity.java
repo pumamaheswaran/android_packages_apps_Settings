@@ -126,6 +126,7 @@ import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.gestures.GestureSettings;
 
 import cyanogenmod.providers.CMSettings;
 
@@ -331,7 +332,8 @@ public class SettingsActivity extends Activity
             LockScreenSettings.class.getName(),
             LiveDisplay.class.getName(),
             DisplayRotation.class.getName(),
-            ContributorsCloudFragment.class.getName()
+            ContributorsCloudFragment.class.getName(),
+            GestureSettings.class.getName()
     };
 
 
